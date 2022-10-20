@@ -78,9 +78,9 @@ export const authenticateIntegrationProvider =
 
 ```bash
 curl --request POST \
-     --header 'content-type: application/json' \
-     --url http://[::1]:4000/api \
-     --data '{"query":"mutation AuthenticateIntegrationProvider($providerId: String!, $apiKey: String!) {\n  authenticateIntegrationProvider(providerId: $providerId, apiKey: $apiKey) {\n    token\n    clients {\n      name\n      id\n    }\n  }\n}","variables":{"providerId":"634c0081c9afb9b91a112310","apiKey":"4f34ac4e52dd16ca1e17d12fca4e2f72c81e42fb"}}'
+    --header 'content-type: application/json' \
+    --url http://localhost:4000/api \
+    --data '{"query":"mutation AuthenticateIntegrationProvider($providerId: String!, $apiKey: String!) {\n  authenticateIntegrationProvider(providerId: $providerId, apiKey: $apiKey) {\n    token\n    clients {\n      name\n      id\n    }\n  }\n}","variables":{"providerId":"634c0081c9afb9b91a112310","apiKey":"4f34ac4e52dd16ca1e17d12fca4e2f72c81e42fb"}}'
 ```
 
 #### Success
