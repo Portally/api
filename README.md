@@ -10,17 +10,22 @@ To be able to query our API, you will need to authenticate yourself. This is don
 
 ```graphql
 type Mutation {
-	authenticateIntegrationProvider(providerId: String!, apiKey: String!): ApiProvider!
+	authenticateIntegrationProvider(providerId: String!, apiKey: String!): AuthenticationResult!
 }
 
-type AuthenticationResult {
-	token: String!
-	ApiClient: [APIClient!]!
+type ProviderClient {
+    name: String!
+    id: String!
+}
+
+type ProviderAuthentication {
+    token: String!
+    clients: [ProviderClient!]!
 }
 ```
 > You can consider types in GraphQL as definition of the shape of the returned objects, where fields ending with "!" means that the field will never be null.
 
-**authenticateIntegrationProvider** returns a token that you pass with every request as the header *I-Auth-token*. 
+**authenticateIntegrationProvider** returns a token that you pass with every request as the header *I-Auth-token*, it also contains the clients you are allowed to add lease agreements to. 
 
 ### Example 
 ```js
@@ -94,7 +99,14 @@ export const authenticateIntegrationProvider =
 To add or edit a lease agreement in Portally use the following mutation
 
 ```graphql
-addExternalLeaseAgreement(externalId: String!, input: AddExternalLeaseAgreementInput!): Boolean!	
+type Mutation {
+    # externalId = Your id for the lease agreement, clientId: The id of the client you want to add the lease agreement to
+    addExternalLeaseAgreement(externalId: String!, clientId: String!, leaseAgreement: LeaseAgreementInput!): ActionTypeEnum!
+}
+enum ActionTypeEnum {
+  added
+  updated
+}
 ```
 The externalId is the ID that you yourself keep for the lease agreement. The input schema is defined below.
 > You can consider input types in GraphQL as objects where "!" means that that the field is required. e.g. "title: String!" means that the input object has to contain a title. Consider enum types the possible strings you can pass. The enum *shop* is passed in as the string "shop".
@@ -171,6 +183,8 @@ enum AccessEnum {
 }
 
 input ExternalFileInput {
+  # Your id of the file so we can keep track 
+  externalId: String!  
   # Url or base64 encoded file  
   source: String!
   # Name of the file, e.g. "image.jpg", if you do not provide a name we will; so please provide one.
@@ -182,7 +196,6 @@ input ExternalFileInput {
 input LeaseAgreementLinkInput {
   # The display name of the link
   title: String!
-  #   
   url: String!
 }
 
