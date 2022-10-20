@@ -70,6 +70,7 @@ export const authenticateIntegrationProvider =
     return result.data.authenticateIntegrationProvider;
   };
 ```
+
 > Note that in GraphQL you select the fields you want returned. In the above example we get back the token and the clients.
 
 #### curl
@@ -148,8 +149,8 @@ input AddExternalLeaseAgreementInput {
   areaDescription: String
   # Images of the premises
   images: [ExternalFileInput!]!
-  # Nearby services  
-  nearbyServices: NearbyServicesInput  
+  # Nearby services
+  nearbyServices: NearbyServicesInput
   # Relevant documents
   documents: [ExternalFileInput!]!
   # Size in square meters
@@ -227,7 +228,7 @@ input LeaseAgreementLinkInput {
 input NearbyServiceInput {
   # Name of the service
   name: String
-  # Distance to the service  
+  # Distance to the service
   distance: Int
 }
 
@@ -239,7 +240,6 @@ input NearbyServicesInput {
   supermarket: NearbyServiceInput
   gym: NearbyServiceInput
 }
-
 ```
 
 As previously stated, adding or editing requires you to provide the _I-Auth-token_ header.
@@ -388,7 +388,7 @@ const queryResult = await fetch('http://[::1]:4000/api', {
     variables
   })
 });
-const result = await queryResult.json(); // { deleteExternalLeaseAgreement: true }
+const result = await queryResult.json();
 ```
 
 ### Success
