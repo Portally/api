@@ -186,6 +186,7 @@ enum UsageCategory {
   warehouse
   # Office
   office
+  # Co work
   coWork
   projectSpace
   # Plot/land, swedish: tomt & mark
