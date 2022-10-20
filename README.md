@@ -156,7 +156,7 @@ input AddExternalLeaseAgreementInput {
   size: Int
   # Size span in square meters, used when the tenant can rent part of the premises
   sizeSpan: SizeSpanInput
-  # Desired rent per sqm
+  # Desired rent in SEK per sqm
   rent: Int
   # Contact person for the premises
   contactPersonEmail: String
@@ -227,7 +227,7 @@ input LeaseAgreementLinkInput {
 input NearbyServiceInput {
   # Name of the service
   name: String
-  # Distance to the service  
+  # Distance in meters to the service  
   distance: Int
 }
 
