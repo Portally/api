@@ -264,6 +264,10 @@ const leaseAgreement: AddExternalLeaseAgreementInput = {
     }
   ],
   links: [],
+  nearbyServices: {
+    bus_station: { name: 'Centralstationen', distance: 80 },
+    parking: { name: 'QPark', distance: 25 }
+  },
   rent: 10000,
   usageCategory: ['office', 'coWork'],
   access: 'immediately',
