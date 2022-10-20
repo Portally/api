@@ -68,6 +68,7 @@ export const authenticateIntegrationProvider =
     return result.data.authenticateIntegrationProvider;
   };
 ```
+> Note that in GraphQL you select the fields you want returned. In the above example we get back the token and the clients.
 
 #### curl
 
