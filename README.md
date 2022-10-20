@@ -88,7 +88,7 @@ curl --request POST \
     data: {
         authenticateIntegrationProvider: {
             token: "token",
-                clients: [
+            clients: [
                 {
                     name: "clientName",
                     id: "clientId"
