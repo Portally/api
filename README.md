@@ -10,7 +10,7 @@ At Portally we use GraphQL, and we will try to provide some basic explanation fo
 
 To be able to query our API, you will need to authenticate yourself. This is done through the following mutation
 ```graphql endpoint
-authenticateIntegrationProvider(providerId: String!, apiKey: String!): AuthenticationResult!
+authenticateIntegrationProvider(providerId: String!, apiKey: String!): ProviderAuthentication!
 ```
 ```graphql
 type ProviderClient {
@@ -24,7 +24,7 @@ type ProviderAuthentication {
 }
 ```
 
-> You can consider types in GraphQL as definition of the shape of the returned objects, where fields ending with "!" means that the field will never be null.
+> You can consider types in GraphQL as definitions of the shape of the returned objects, where fields ending with "!" means that the field will never be null.
 
 **authenticateIntegrationProvider** returns a token that you pass with every request as the header _I-Auth-token_, it also contains the clients you are allowed to add lease agreements to.
 
@@ -75,7 +75,20 @@ export const authenticateIntegrationProvider =
 curl --request POST \
      --header 'content-type: application/json' \
      --url http://[::1]:4000/api \
-     --data '{"query":"mutation AuthenticateIntegrationProvider($providerId: String!, $apiKey: String!) {\n  authenticateIntegrationProvider(providerId: $providerId, apiKey: $apiKey) {\n    token\n    clients {\n      name\n      id\n    }\n  }\n}","variables":{"providerId":"634c0081c9afb9b91a112310","apiKey":"4f34ac4e52dd16ca1e17d12fca4e2f72c81e42fb"}}'
+     --data '{"query":"mutation AuthenticateIntegrationProvider($providerId: String!, $apiKey: String!) { 
+                authenticateIntegrationProvider(providerId: $providerId, apiKey: $apiKey) {
+                   token
+                   clients {
+                     name
+                     id
+                  }
+                }
+             }",
+             "variables": { 
+                "providerId":"634c0081c9afb9b91a112310",
+                "apiKey":"4f34ac4e52dd16ca1e17d12fca4e2f72c81e42fb" 
+              }
+           }'
 ```
 
 #### Success
