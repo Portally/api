@@ -317,7 +317,7 @@ const queryResult = await fetch('http://[::1]:4000/api', {
 });
 const result = await queryResult.json();
 ```
-
+> In this case the mutation returns a Scalar, so we do not have to select any fields.
 #### Success
 
 Add
