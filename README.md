@@ -139,7 +139,7 @@ input AddExternalLeaseAgreementInput {
   # Short description of the premises
   title: String
   # The address of the premises
-  address: MandatoryAddressInput!
+  address: RequiredAddressInput!
   # The type of premises
   usageCategory: [UsageCategory!]!
   # Long description of the premises
@@ -148,6 +148,8 @@ input AddExternalLeaseAgreementInput {
   areaDescription: String
   # Images of the premises
   images: [ExternalFileInput!]!
+  # Nearby services  
+  nearbyServices: NearbyServicesInput  
   # Relevant documents
   documents: [ExternalFileInput!]!
   # Size in square meters
@@ -164,8 +166,8 @@ input AddExternalLeaseAgreementInput {
   links: [LeaseAgreementLinkInput!]!
 }
 
-# Utilities
-input MandatoryAddressInput {
+# Types
+input RequiredAddressInput {
   # Street name, do not include number here
   street: String!
   city: String!
@@ -221,6 +223,23 @@ input LeaseAgreementLinkInput {
   title: String!
   url: String!
 }
+
+input NearbyServiceInput {
+  # Name of the service
+  name: String
+  # Distance to the service  
+  distance: Int
+}
+
+input NearbyServicesInput {
+  bus_station: NearbyServiceInput
+  subway_station: NearbyServiceInput
+  train_station: NearbyServiceInput
+  parking: NearbyServiceInput
+  supermarket: NearbyServiceInput
+  gym: NearbyServiceInput
+}
+
 ```
 
 As previously stated, adding or editing requires you to provide the _I-Auth-token_ header.
