@@ -7,12 +7,10 @@ At Portally we use GraphQL, and we will try to provide some basic explanation fo
 > To use our API we assume you have been setup with an account and have gotten your Provider ID as well as your API key. If you don't have an account,          reach out to us at support@portally.com and we'll get you started.
 
 To be able to query our API, you will need to authenticate yourself. This is done through the following mutation
-
+```graphql endpoint
+authenticateIntegrationProvider(providerId: String!, apiKey: String!): AuthenticationResult!
+```
 ```graphql
-type Mutation {
-	authenticateIntegrationProvider(providerId: String!, apiKey: String!): AuthenticationResult!
-}
-
 type ProviderClient {
     name: String!
     id: String!
@@ -98,11 +96,11 @@ export const authenticateIntegrationProvider =
 
 To add or edit a lease agreement in Portally use the following mutation
 
+```graphql endpoint
+# externalId = Your id for the lease agreement, clientId: The id of the client you want to add the lease agreement to
+addExternalLeaseAgreement(externalId: String!, clientId: String!, leaseAgreement: LeaseAgreementInput!): ActionTypeEnum!
+```
 ```graphql
-type Mutation {
-    # externalId = Your id for the lease agreement, clientId: The id of the client you want to add the lease agreement to
-    addExternalLeaseAgreement(externalId: String!, clientId: String!, leaseAgreement: LeaseAgreementInput!): ActionTypeEnum!
-}
 enum ActionTypeEnum {
   added
   updated
@@ -302,7 +300,7 @@ Edit
 ## Removing a lease agreement
 To remove a lease agreement from Portally use the following mutation
 
-```graphql
+```graphql endpoint
 addExternalLeaseAgreement(externalId: String!, input: AddExternalLeaseAgreementInput!): Boolean!    
 ```
 
