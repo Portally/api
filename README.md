@@ -10,14 +10,11 @@ At Portally we use GraphQL, and we will try to provide some basic explanation fo
 
 To be able to query our API, you will need to authenticate yourself. This is done through the following mutation
 
-```graphql
-type Mutation {
-  authenticateIntegrationProvider(
-    providerId: String!
-    apiKey: String!
-  ): AuthenticationResult!
-}
+```graphql endpoint
+authenticateIntegrationProvider(providerId: String!, apiKey: String!): ProviderAuthentication!
+```
 
+```graphql
 type ProviderClient {
   name: String!
   id: String!
@@ -29,7 +26,7 @@ type ProviderAuthentication {
 }
 ```
 
-> You can consider types in GraphQL as definition of the shape of the returned objects, where fields ending with "!" means that the field will never be null.
+> You can consider types in GraphQL as definitions of the shape of the returned objects, where fields ending with "!" means that the field will never be null.
 
 **authenticateIntegrationProvider** returns a token that you pass with every request as the header _I-Auth-token_, it also contains the clients you are allowed to add lease agreements to.
 
@@ -120,15 +117,12 @@ curl --request POST \
 
 To add or edit a lease agreement in Portally use the following mutation
 
+```graphql endpoint
+# externalId = Your id for the lease agreement, clientId: The id of the client you want to add the lease agreement to
+addExternalLeaseAgreement(externalId: String!, clientId: String!, leaseAgreement: LeaseAgreementInput!): ActionTypeEnum!
+```
+
 ```graphql
-type Mutation {
-  # externalId = Your id for the lease agreement, clientId: The id of the client you want to add the lease agreement to
-  addExternalLeaseAgreement(
-    externalId: String!
-    clientId: String!
-    leaseAgreement: LeaseAgreementInput!
-  ): ActionTypeEnum!
-}
 enum ActionTypeEnum {
   added
   updated
@@ -339,7 +333,7 @@ Edit
 To remove a lease agreement from Portally use the following mutation
 
 ```graphql
-addExternalLeaseAgreement(externalId: String!, input: AddExternalLeaseAgreementInput!): Boolean!
+deleteExternalLeaseAgreement(clientId: String!, externalId: String!): Boolean!
 ```
 
 ### Example
