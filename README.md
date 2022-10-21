@@ -153,7 +153,8 @@ input AddExternalLeaseAgreementInput {
   nearbyServices: NearbyServicesInput
   # Relevant documents
   documents: [ExternalFileInput!]!
-  # Size in square meters
+  # Size in square meters.
+  # size and sizeSpan are not required but you have to pass at least one of them. If you pass both, sizeSpan will have priority.  
   size: Int
   # Size span in square meters, used when the tenant can rent part of the premises
   sizeSpan: SizeSpanInput
