@@ -157,8 +157,8 @@ input AddExternalLeaseAgreementInput {
   size: Int
   # Size span in square meters, used when the tenant can rent part of the premises
   sizeSpan: SizeSpanInput
-  # Desired rent in SEK per sqm
-  rent: Int
+  # Desired charge 
+  charge: ChargeInput  
   # Contact person for the premises
   contactPersonEmail: String
   # When the tenant is able to move in
@@ -167,7 +167,20 @@ input AddExternalLeaseAgreementInput {
   links: [LeaseAgreementLinkInput!]!
 }
 
+
 # Types
+enum ChargeType {
+    # displays as SEK per sqm and year
+    perSqm
+    # displays as SEK Per month
+    monthly
+}
+
+input ChargeInput {
+    type: ChargeType
+    amount: Int
+}
+
 input RequiredAddressInput {
   # Street name, do not include number here
   street: String!
@@ -289,7 +302,10 @@ const leaseAgreement: AddExternalLeaseAgreementInput = {
     bus_station: { name: 'Centralstationen', distance: 80 },
     parking: { name: 'QPark', distance: 25 }
   },
-  rent: 10000,
+  charge: {
+      type: ChargeType.perSqm,
+      amount: 10000,
+  },
   usageCategory: ['office', 'coWork'],
   access: 'immediately',
   contactPersonEmail: 'samuel@portally.com',
