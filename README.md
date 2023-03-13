@@ -170,7 +170,7 @@ input AddExternalLeaseAgreementInput {
 
 
 # Types
-enum RentType {
+enum FeeType {
     # displays as SEK per sqm and year
     perSqm
     # displays as SEK Per month
@@ -178,7 +178,7 @@ enum RentType {
 }
 
 input FeeInput {
-    rentType: RentType!
+    feeType: FeeType!
     amount: Int!
 }
 
@@ -304,7 +304,7 @@ const leaseAgreement: AddExternalLeaseAgreementInput = {
     parking: { name: 'QPark', distance: 25 }
   },
   fee: {
-      rentType: RentType.perSqm,
+      feeType: FeeType.perSqm,
       amount: 10000,
   },
   usageCategory: ['office', 'coWork'],
