@@ -158,8 +158,8 @@ input AddExternalLeaseAgreementInput {
   size: Int
   # Size span in square meters, used when the tenant can rent part of the premises
   sizeSpan: SizeSpanInput
-  # Desired charge 
-  charge: ChargeInput  
+  # Desired fee 
+  fee: FeeInput  
   # Contact person for the premises
   contactPersonEmail: String
   # When the tenant is able to move in
@@ -170,16 +170,16 @@ input AddExternalLeaseAgreementInput {
 
 
 # Types
-enum ChargeType {
+enum RentType {
     # displays as SEK per sqm and year
     perSqm
     # displays as SEK Per month
     monthly
 }
 
-input ChargeInput {
-    type: ChargeType
-    amount: Int
+input FeeInput {
+    rentType: RentType!
+    amount: Int!
 }
 
 input RequiredAddressInput {
@@ -303,8 +303,8 @@ const leaseAgreement: AddExternalLeaseAgreementInput = {
     bus_station: { name: 'Centralstationen', distance: 80 },
     parking: { name: 'QPark', distance: 25 }
   },
-  charge: {
-      type: ChargeType.perSqm,
+  fee: {
+      rentType: RentType.perSqm,
       amount: 10000,
   },
   usageCategory: ['office', 'coWork'],
